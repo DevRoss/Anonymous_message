@@ -23,4 +23,4 @@ class GetMessageSerializer(serializers.ModelSerializer):
 class PostMessageSerializer(serializers.ModelSerializer):
     class Meta:
         model = Messages
-        fields = ('content', 'ip')
+        fields = ('content',)

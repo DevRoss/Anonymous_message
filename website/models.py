@@ -1,10 +1,8 @@
 from django.db import models
-<<<<<<< HEAD
 from django.template.defaultfilters import default
 
 from website.extend_function import getIPFromDJangoRequest
-=======
->>>>>>> origin/master
+
 
 # Create your models here.
 
