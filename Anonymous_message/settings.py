@@ -24,9 +24,9 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'bzbda@3*yuevwffen!%qv5xtq!5_lzfy0e4+nu4evu5ateqb1%'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['127.0.0.1']
 
 # Application definition
 
@@ -79,9 +79,9 @@ WSGI_APPLICATION = 'Anonymous_message.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': '',
-        'USER': '',
-        'PASSWORD': '',
+        'NAME': 'anonymous_message',
+        'USER': 'root',
+        'PASSWORD': 'chaojie56',
         'HOST': '',
         'PORT': '',
     }

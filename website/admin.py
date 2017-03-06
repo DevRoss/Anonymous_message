@@ -6,5 +6,5 @@ from website.models import *
 
 @admin.register(Messages)
 class MessagesAdmin(admin.ModelAdmin):
-    list_display = ('time', 'content', )
+    list_display = ('time', 'content', 'ip')
     search_fields = ('time',)
