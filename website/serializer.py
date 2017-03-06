@@ -12,3 +12,6 @@ class GetMessageSerializer(serializers.ModelSerializer):
 
     def get_unix_time(self, obj):
         return dateformat.format(obj.time, 'U')
+
+# class PostMessageSerializer(serializers.ModelSerializer):
+#
