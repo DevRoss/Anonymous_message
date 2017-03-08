@@ -21,6 +21,11 @@ class GetMessageSerializer(serializers.ModelSerializer):
 
 # 发表留言
 class PostMessageSerializer(serializers.ModelSerializer):
+    time = serializers.SerializerMethodField()
+
     class Meta:
         model = Messages
-        fields = ('content',)
+        fields = ('content', 'time')
+
+    def get_time(self, obj):
+        return dateformat.format(obj.time, 'U')

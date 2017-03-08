@@ -1,7 +1,8 @@
 from django.db import models
 from django.template.defaultfilters import default
 
-from website.extend_function import getIPFromDJangoRequest
+
+# from website.extend_function import getIPFromDJangoRequest
 
 
 # Create your models here.
