@@ -1,12 +1,7 @@
 from django.db import models
-from django.template.defaultfilters import default
-
-
-# from website.extend_function import getIPFromDJangoRequest
-
+from django.contrib.auth.models import User
 
 # Create your models here.
-
 
 # 留言
 class Messages(models.Model):
@@ -19,3 +14,7 @@ class Messages(models.Model):
 
     def __str__(self):
         return '留言'
+
+
+class CustomUser(models.Model):
+    user =models.OneToOneField(User)

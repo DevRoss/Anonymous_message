@@ -26,12 +26,14 @@ SECRET_KEY = 'bzbda@3*yuevwffen!%qv5xtq!5_lzfy0e4+nu4evu5ateqb1%'
 # SECURITY WARNING: don't run with debug turned on in production!
 # 如果是服务器set DEUBG 为FALSE
 # 如果是开发机器set DEUBG 为TRUE
-if socket.gethostname() == 'VM_75_93_centos' or 'Ross':
-    DEBUG = TEMPLATE_DEBUG = False
+if socket.gethostname() == 'VM_75_93_centos':
+    DEBUG = False
+    # TEMPLATE_DEBUG = False
     ALLOWED_HOSTS = ['127.0.0.1', '*']
     print("DEBUG False")
 else:
-    DEBUG = TEMPLATE_DEBUG = True
+    DEBUG = True
+    # TEMPLATE_DEBUG = True
 
 # Application definition
 
@@ -46,6 +48,7 @@ INSTALLED_APPS = [
     'website',
     'corsheaders',
 ]
+
 
 MIDDLEWARE_CLASSES = [
     'django.middleware.security.SecurityMiddleware',
@@ -88,8 +91,8 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'anonymous_message',
-        'USER': 'ross',
-        'PASSWORD': 'message',
+        'USER': 'root',
+        'PASSWORD': 'chaojie56',
         'HOST': '',
         'PORT': '',
         'OPTIONS': {
@@ -138,6 +141,8 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.9/howto/static-files/
 
+# 自定义用户model
+# AUTH_USER_MODEL = 'website.CustomUser'
 
 # Static files
 STATIC_URL = '/static/'
@@ -157,96 +162,3 @@ REST_FRAMEWORK = {
 # CORS_setting 跨域
 CORS_ORIGIN_ALLOW_ALL = True
 CORS_ALLOW_CREDENTIALS = False
-# CORS setting
-# CORS_ORIGIN_WHITELIST = (
-#     '*',
-# )
-# CORS_URLS_REGEX = r'^/api/.*$'
-# CORS_ALLOW_METHODS = (
-#     'DELETE',
-#     'GET',
-#     'OPTIONS',
-#     'PATCH',
-#     'POST',
-#     'PUT',
-# )
-
-
-# 自定义日志输出信息
-# LOGGING = {
-#     'version': 1,
-#     'disable_existing_loggers': True,
-#     'formatters': {
-#         'standard': {
-#             'format': '%(asctime)s [%(threadName)s:%(thread)d] [%(name)s:%(lineno)d] [%(module)s:%(funcName)s] [%(levelname)s]- %(message)s'}
-#         # 日志格式
-#     },
-#     'filters': {
-#     },
-#     'handlers': {
-#         'mail_admins': {
-#             'level': 'ERROR',
-#             'class': 'django.utils.log.AdminEmailHandler',
-#             'include_html': True,
-#         },
-#         'default': {
-#             'level': 'DEBUG',
-#             'class': 'logging.handlers.RotatingFileHandler',
-#             'filename': 'log/all.log',  # 日志输出文件
-#             'maxBytes': 1024 * 1024 * 5,  # 文件大小
-#             'backupCount': 5,  # 备份份数
-#             'formatter': 'standard',  # 使用哪种formatters日志格式
-#         },
-#         'error': {
-#             'level': 'ERROR',
-#             'class': 'logging.handlers.RotatingFileHandler',
-#             'filename': 'log/error.log',
-#             'maxBytes': 1024 * 1024 * 5,
-#             'backupCount': 5,
-#             'formatter': 'standard',
-#         },
-#         'console': {
-#             'level': 'DEBUG',
-#             'class': 'logging.StreamHandler',
-#             'formatter': 'standard'
-#         },
-#         'request_handler': {
-#             'level': 'DEBUG',
-#             'class': 'logging.handlers.RotatingFileHandler',
-#             'filename': 'log/script.log',
-#             'maxBytes': 1024 * 1024 * 5,
-#             'backupCount': 5,
-#             'formatter': 'standard',
-#         },
-#         'scprits_handler': {
-#             'level': 'DEBUG',
-#             'class': 'logging.handlers.RotatingFileHandler',
-#             'filename': 'log/script.log',
-#             'maxBytes': 1024 * 1024 * 5,
-#             'backupCount': 5,
-#             'formatter': 'standard',
-#         }
-#     },
-#     'loggers': {
-#         'django': {
-#             'handlers': ['default', 'console'],
-#             'level': 'DEBUG',
-#             'propagate': False
-#         },
-#         'django.request': {
-#             'handlers': ['request_handler'],
-#             'level': 'DEBUG',
-#             'propagate': False,
-#         },
-#         'scripts': {
-#             'handlers': ['scprits_handler'],
-#             'level': 'INFO',
-#             'propagate': False
-#         },
-#         'blog.views': {
-#             'handlers': ['default', 'error'],
-#             'level': 'DEBUG',
-#             'propagate': True
-#         },
-#     }
-# }
