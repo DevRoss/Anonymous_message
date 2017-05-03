@@ -7,7 +7,4 @@ from website.models import *
 class MessagesAdmin(admin.ModelAdmin):
     list_display = ('time', 'content', 'ip')
     search_fields = ('time',)
-@admin.register(CustomUser)
-class CustomUserAdmin(admin.ModelAdmin):
-    list_display = ('user',)
 

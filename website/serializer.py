@@ -34,27 +34,4 @@ class PostMessageSerializer(serializers.ModelSerializer):
         return dateformat.format(obj.time, 'U')
 
 
-class UserSerializer(serializers.ModelSerializer):
-    username = serializers.CharField()
 
-    class Meta:
-        model = User
-        fields = ('username', 'password')
-
-    def validate(self, data):
-        user_obj = None
-        username = data.get("username", None)
-        password = data.get("password", None)
-        if not username:
-            raise ValidationError('A username or email is required to login.')
-        user = User.objects.filter(username=username)
-        print(user)
-        if user.exists():
-            print(user.count())
-            user_obj = user.first()
-        else:
-            raise ValidationError("Incorrect username")
-        if user_obj:
-            if not user_obj.check_password(password):
-                raise ValidationError('Incorrect password. Please try again.')
-        return data
