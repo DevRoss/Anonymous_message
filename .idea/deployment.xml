@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="PublishConfigData" serverName="message">
+    <serverData>
+      <paths name="message">
+        <serverdata>
+          <mappings>
+            <mapping deploy="/home/Anonymous_message" local="$PROJECT_DIR$" web="/" />
+          </mappings>
+          <excludedPaths>
+            <excludedPath local="true" path="$PROJECT_DIR$/templates" />
+            <excludedPath path="/home/Anonymous_message/templates" />
+            <excludedPath local="true" path="$PROJECT_DIR$/static" />
+          </excludedPaths>
+        </serverdata>
+      </paths>
+    </serverData>
+  </component>
+</project>
