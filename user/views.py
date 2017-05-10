@@ -2,21 +2,20 @@ from django.contrib import auth
 from rest_framework.views import APIView
 from .serializer import (UserLoginSerializer,
                          )
-from rest_framework import authentication
 from rest_framework.views import Response
 from rest_framework import status
 from rest_framework.authentication import TokenAuthentication
 from rest_framework import parsers
 from rest_framework import permissions
 from rest_framework.authtoken.models import Token
-# Create your views here.
 from django.contrib.auth.models import User
+from rest_framework import generics
+from util.authentication import ExpiringTokenAuthentication
 
-
-class UserLogin(APIView):
-    # authentication_classes = (TokenAuthentication,)
+class UserLogin(generics.GenericAPIView):
     serializer_class = UserLoginSerializer
-    permission_classes = (permissions.AllowAny,)
+    permission_classes = (permissions.AllowAny, )
+    parser_classes = (parsers.JSONParser, )
 
     def __create_token(self, user):
 
@@ -47,10 +46,10 @@ class UserLogin(APIView):
 
 class UserLogout(APIView):
     permission_classes = (permissions.IsAuthenticated,)
-    authentication_classes = (TokenAuthentication,)
-
+    authentication_classes = (ExpiringTokenAuthentication, )
     def get(self, request):
         user = request.user
+        # print(request.auth.token)
         user = Token.objects.get(user=user)
         user.delete()
         ret_json = {

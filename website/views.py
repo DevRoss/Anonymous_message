@@ -1,6 +1,4 @@
-# from django.shortcuts import render
 from website.models import Messages, User
-from rest_framework.renderers import JSONRenderer
 from rest_framework import generics
 from rest_framework.views import APIView
 from website.serializer import (GetMessageSerializer,
@@ -8,10 +6,10 @@ from website.serializer import (GetMessageSerializer,
                                 )
 from rest_framework import parsers
 from rest_framework import filters
-from rest_framework.authentication import SessionAuthentication, TokenAuthentication
-from rest_framework.permissions import AllowAny, IsAuthenticated
-from rest_framework.response import Response
-from rest_framework import status
+# from rest_framework.authentication import SessionAuthentication, TokenAuthentication
+# from rest_framework.permissions import AllowAny, IsAuthenticated
+# from rest_framework.response import Response
+# from rest_framework import status
 
 
 # Create your views here.
