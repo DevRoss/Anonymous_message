@@ -1,8 +1,8 @@
 from rest_framework import serializers
-from website.models import Messages, User
+from website.models import Messages, User, SS
 from django.utils import dateformat
-from rest_framework.exceptions import ValidationError
-from django.db.models import Q
+
+# from rest_framework.exceptions import ValidationError
 # from django.contrib.auth.models import User
 
 '''
@@ -34,4 +34,8 @@ class PostMessageSerializer(serializers.ModelSerializer):
         return dateformat.format(obj.time, 'U')
 
 
+class GetSSSerializer(serializers.ModelSerializer):
 
+    class Meta:
+        model = SS
+        fields = ('ip', 'port', 'region')

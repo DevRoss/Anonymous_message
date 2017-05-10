@@ -1,13 +1,14 @@
-from website.models import Messages, User
+from website.models import Messages, SS
 from rest_framework import generics
 from rest_framework.views import APIView
-from website.serializer import (GetMessageSerializer,
-                                PostMessageSerializer,
-                                )
+from website.serializer import *
 from rest_framework import parsers
 from rest_framework import filters
-# from rest_framework.authentication import SessionAuthentication, TokenAuthentication
-# from rest_framework.permissions import AllowAny, IsAuthenticated
+from utils.authentication import ExpiringTokenAuthentication
+from rest_framework import permissions
+from rest_framework.authtoken.models import Token
+
+
 # from rest_framework.response import Response
 # from rest_framework import status
 
@@ -32,3 +33,8 @@ class PostMessageDev(generics.CreateAPIView):
     parser_classes = (parsers.FormParser,)
 
 
+class GetSS(generics.ListAPIView):
+    queryset = SS.objects.all()
+    serializer_class = GetSSSerializer
+    authentication_classes = (ExpiringTokenAuthentication,)
+    permission_classes = (permissions.IsAuthenticated,)

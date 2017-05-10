@@ -10,12 +10,13 @@ from rest_framework import permissions
 from rest_framework.authtoken.models import Token
 from django.contrib.auth.models import User
 from rest_framework import generics
-from util.authentication import ExpiringTokenAuthentication
+from utils.authentication import ExpiringTokenAuthentication
+
 
 class UserLogin(generics.GenericAPIView):
     serializer_class = UserLoginSerializer
-    permission_classes = (permissions.AllowAny, )
-    parser_classes = (parsers.JSONParser, )
+    permission_classes = (permissions.AllowAny,)
+    parser_classes = (parsers.JSONParser,)
 
     def __create_token(self, user):
 
@@ -35,21 +36,21 @@ class UserLogin(generics.GenericAPIView):
         if serializer.is_valid(raise_exception=True):
             user = User.objects.get(username=serializer.data['username'])
             token = self.__create_token(user=user)
-            res_json = {
-                'Token': token.key,
-                'error_code': 0
+            ret_json = {
+                "Token": token.key,
+                "error_code": 0
             }
             # new_data = serializer.data
-            return Response(res_json, status=status.HTTP_200_OK)
-        return Response(serializer.errors, status=status.HTTP_401_UNAUTHORIZED)
+            return Response(ret_json, status=status.HTTP_200_OK)
+        return Response(serializer.error_messages, status=status.HTTP_401_UNAUTHORIZED)
 
 
 class UserLogout(APIView):
     permission_classes = (permissions.IsAuthenticated,)
-    authentication_classes = (ExpiringTokenAuthentication, )
+    authentication_classes = (ExpiringTokenAuthentication,)
+
     def get(self, request):
         user = request.user
-        # print(request.auth.token)
         user = Token.objects.get(user=user)
         user.delete()
         ret_json = {

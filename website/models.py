@@ -16,3 +16,14 @@ class Messages(models.Model):
     def __str__(self):
         return '留言'
 
+
+class SS(models.Model):
+    ip = models.GenericIPAddressField(verbose_name='ip地址')
+    port = models.CharField(verbose_name='端口', max_length=5, null=False, blank=False)
+    region = models.CharField(verbose_name='地区', max_length=20, null=True, blank=True)
+
+    class Meta:
+        verbose_name = verbose_name_plural = 'SS'
+
+    def __str__(self):
+        return 'SS'
