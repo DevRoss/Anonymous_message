@@ -12,5 +12,5 @@ class MessagesAdmin(admin.ModelAdmin):
 
 @admin.register(SS)
 class MessagesAdmin(admin.ModelAdmin):
-    list_display = ('region', 'ip', 'port')
+    list_display = ('server_name', 'ip', 'port', 'password', 'region', 'encrypt_method')
     search_fields = ('region',)

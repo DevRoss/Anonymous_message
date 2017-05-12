@@ -1,6 +1,7 @@
 from rest_framework import serializers
 from website.models import Messages, User, SS
 from django.utils import dateformat
+import base64
 
 # from rest_framework.exceptions import ValidationError
 # from django.contrib.auth.models import User
@@ -35,7 +36,15 @@ class PostMessageSerializer(serializers.ModelSerializer):
 
 
 class GetSSSerializer(serializers.ModelSerializer):
+    ss_link = serializers.SerializerMethodField()
 
     class Meta:
         model = SS
-        fields = ('ip', 'port', 'region')
+        fields = ('server_name', 'ip', 'port', 'password', 'region', 'encrypt_method', 'ss_link')
+
+    def get_ss_link(self, obj):
+        config = '{encrypt_method}:{password}@{ip}:{port}'
+        config = config.format(encrypt_method=obj.encrypt_method, password=obj.password, ip=obj.ip, port=obj.port)
+        server_name = str('#' + obj.server_name).encode()
+        ret = b'ss://' + base64.urlsafe_b64encode(config.encode()) + server_name
+        return ret

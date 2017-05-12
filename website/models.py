@@ -1,7 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
 
-
 # Create your models here.
 
 # 留言
@@ -18,9 +17,12 @@ class Messages(models.Model):
 
 
 class SS(models.Model):
+    server_name = models.CharField(verbose_name='服务器名', max_length=20, null=False, blank= False)
     ip = models.GenericIPAddressField(verbose_name='ip地址')
-    port = models.CharField(verbose_name='端口', max_length=5, null=False, blank=False)
+    port = models.CharField(verbose_name='远程端口', max_length=5, null=False, blank=False)
     region = models.CharField(verbose_name='地区', max_length=20, null=True, blank=True)
+    password = models.CharField(verbose_name='密码', max_length=30, null=False, blank=False)
+    encrypt_method = models.CharField(verbose_name='加密方式', max_length=30, null=False, blank=False)
 
     class Meta:
         verbose_name = verbose_name_plural = 'SS'
