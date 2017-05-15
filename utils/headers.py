@@ -1,5 +1,6 @@
 from rest_framework import HTTP_HEADER_ENCODING
 
+
 def get_authorization_header(request):
     '''
     Return AUTHENTICATION CODE 

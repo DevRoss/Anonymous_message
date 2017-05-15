@@ -1,11 +1,15 @@
 import qrcode
 import base64
+from Anonymous_message.settings import MEDIA_ROOT
+import os
 
 
-def generate_ss_link(self, obj):
+def generate_ss_uri(serializer):
     config = '{encrypt_method}:{password}@{ip}:{port}'
-    config = config.format(encrypt_method=obj.encrypt_method, password=obj.password, ip=obj.ip, port=obj.port)
-    server_name = str('#' + obj.server_name).encode()
+    config = config.format(encrypt_method=serializer.validated_data['encrypt_method'],
+                           password=serializer.validated_data['password'],
+                           ip=serializer.validated_data['ip'], port=serializer.validated_data['port'])
+    server_name = str('#' + serializer.validated_data['server_name']).encode()
     ret = b'ss://' + base64.urlsafe_b64encode(config.encode()) + server_name
     return ret
 
@@ -18,6 +22,7 @@ def generate_qc(ss_uri, server_name):
         border=0
     )
     qr.add_data(ss_uri)
-    img_name = server_name + b'.png'
+    img_name = server_name + '.png'
     img = qr.make_image()
-    img.save(img_name)
+    path = os.path.join(MEDIA_ROOT, 'QR', img_name)
+    img.save(stream=path)

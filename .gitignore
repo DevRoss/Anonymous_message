@@ -4,3 +4,6 @@ anonymous_message_nginx.conf
 Anonymous_message_uwsgi.ini
 .static/
 .pyc
+website/migrations
+user/migrations
+*__pycache__/

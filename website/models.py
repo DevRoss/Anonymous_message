@@ -26,11 +26,14 @@ class SS(models.Model):
     region = models.CharField(verbose_name='地区', max_length=20, null=True, blank=True)
     password = models.CharField(verbose_name='密码', max_length=30, null=False, blank=False)
     encrypt_method = models.CharField(verbose_name='加密方式', max_length=30, null=False, blank=False)
-    qr_code = models.FilePathField(verbose_name='QC路径', path=os.path.join(MEDIA_ROOT, 'QR'), match='*\.png$',
-                                   recursive=True, max_length=100)
+    qr_code = models.FilePathField(verbose_name='QC路径', path=os.path.join(MEDIA_ROOT, 'QC'),
+                                   recursive=True, max_length=100, blank=True)
 
     class Meta:
         verbose_name = verbose_name_plural = 'SS'
 
     def __str__(self):
         return 'SS'
+
+    def get_path(self):
+        return os.path.join(MEDIA_ROOT, 'QC')

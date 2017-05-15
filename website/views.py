@@ -8,7 +8,7 @@ from utils.authentication import ExpiringTokenAuthentication
 from rest_framework import permissions
 from Anonymous_message.settings import MEDIA_ROOT
 import os
-from utils.qc_generator import generate_qc
+from utils.ss_config import generate_qc, generate_ss_uri
 from rest_framework.response import Response
 from rest_framework import status
 
@@ -37,9 +37,15 @@ class PostMessageDev(generics.CreateAPIView):
     parser_classes = (parsers.FormParser,)
 
 
-class AddOrGetSS(generics.ListCreateAPIView):
+class GetSS(generics.ListAPIView):
     queryset = SS.objects.all()
-    serializer_class = AddOrGetSSSerializer
+    serializer_class = GetSSSerializer
+    authentication_classes = (ExpiringTokenAuthentication,)
+    permission_classes = (permissions.IsAuthenticated,)
+
+
+class AddSS(generics.CreateAPIView):
+    serializer_class = AddSSSerializer
     authentication_classes = (ExpiringTokenAuthentication,)
     permission_classes = (permissions.IsAuthenticated,)
 
@@ -48,9 +54,11 @@ class AddOrGetSS(generics.ListCreateAPIView):
         serializer.is_valid(raise_exception=True)
         # 如果表单验证成功
         # 生成二维码并储存路径
-        generate_qc(serializer.data['ss_link'], serializer.data['server_name'])
-        file_name = serializer.data['server_name'] + '.png'
-        serializer.data['qr_code'] = os.path.join(MEDIA_ROOT, file_name)
+        ss_uri = generate_ss_uri(serializer=serializer)
+        generate_qc(ss_uri, serializer.validated_data['server_name'])
+        file_name = serializer.validated_data['server_name'] + '.png'
+        serializer.validated_data['qr_code'] = os.path.join('media', 'QR', file_name)
         self.perform_create(serializer)
         headers = self.get_success_headers(serializer.data)
-        return Response(serializer.data, status=status.HTTP_201_CREATED, headers=headers)
+        serializer.validated_data['error_code'] = 0
+        return Response(serializer.validated_data, status=status.HTTP_201_CREATED, headers=headers)

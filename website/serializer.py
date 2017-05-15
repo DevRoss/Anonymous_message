@@ -36,16 +36,22 @@ class PostMessageSerializer(serializers.ModelSerializer):
         return dateformat.format(obj.time, 'U')
 
 
-class AddOrGetSSSerializer(serializers.ModelSerializer):
-    ss_link = serializers.SerializerMethodField()
+class GetSSSerializer(serializers.ModelSerializer):
+    ss_uri = serializers.SerializerMethodField()
 
     class Meta:
         model = SS
-        fields = ('server_name', 'ip', 'port', 'password', 'region', 'encrypt_method', 'ss_link', 'qr_code')
+        fields = ('server_name', 'ip', 'port', 'password', 'region', 'encrypt_method', 'ss_uri', 'qr_code')
 
-    def get_ss_link(self, obj):
+    def get_ss_uri(self, obj):
         config = '{encrypt_method}:{password}@{ip}:{port}'
         config = config.format(encrypt_method=obj.encrypt_method, password=obj.password, ip=obj.ip, port=obj.port)
         server_name = str('#' + obj.server_name).encode()
         ret = b'ss://' + base64.urlsafe_b64encode(config.encode()) + server_name
         return ret
+
+
+class AddSSSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = SS
+        fields = ('server_name', 'ip', 'port', 'password', 'region', 'encrypt_method', 'qr_code')
