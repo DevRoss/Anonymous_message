@@ -2,6 +2,7 @@ from rest_framework import serializers
 from website.models import Messages, User, SS
 from django.utils import dateformat
 import base64
+from Anonymous_message.settings import MEDIA_ROOT
 
 # from rest_framework.exceptions import ValidationError
 # from django.contrib.auth.models import User
@@ -35,12 +36,12 @@ class PostMessageSerializer(serializers.ModelSerializer):
         return dateformat.format(obj.time, 'U')
 
 
-class GetSSSerializer(serializers.ModelSerializer):
+class AddOrGetSSSerializer(serializers.ModelSerializer):
     ss_link = serializers.SerializerMethodField()
 
     class Meta:
         model = SS
-        fields = ('server_name', 'ip', 'port', 'password', 'region', 'encrypt_method', 'ss_link')
+        fields = ('server_name', 'ip', 'port', 'password', 'region', 'encrypt_method', 'ss_link', 'qr_code')
 
     def get_ss_link(self, obj):
         config = '{encrypt_method}:{password}@{ip}:{port}'
