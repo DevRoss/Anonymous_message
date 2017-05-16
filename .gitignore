@@ -3,7 +3,5 @@ Anonymous_message/settings_debug.py
 anonymous_message_nginx.conf
 Anonymous_message_uwsgi.ini
 .static/
-.pyc
-website/migrations
-user/migrations
-*__pycache__/
+*.pyc
+.*/migrations/
