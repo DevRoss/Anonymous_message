@@ -54,4 +54,4 @@ class GetSSSerializer(serializers.ModelSerializer):
 class AddSSSerializer(serializers.ModelSerializer):
     class Meta:
         model = SS
-        fields = ('server_name', 'ip', 'port', 'password', 'region', 'encrypt_method', 'qr_code')
+        fields = ('server_name', 'ip', 'port', 'password', 'region', 'encrypt_method')

@@ -57,7 +57,7 @@ class AddSS(generics.CreateAPIView):
         ss_uri = generate_ss_uri(serializer=serializer)
         generate_qc(ss_uri, serializer.validated_data['server_name'])
         file_name = serializer.validated_data['server_name'] + '.png'
-        serializer.validated_data['qr_code'] = os.path.join('media', 'QR', file_name)
+        serializer.validated_data['qr_code'] = os.path.join(MEDIA_ROOT, 'QR', file_name)
         self.perform_create(serializer)
         headers = self.get_success_headers(serializer.data)
         serializer.validated_data['error_code'] = 0
