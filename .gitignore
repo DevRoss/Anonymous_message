@@ -6,3 +6,4 @@ Anonymous_message_uwsgi.ini
 *.pyc
 .*/migrations/
 .website/migrations/*
+.media/*

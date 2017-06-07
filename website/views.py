@@ -48,6 +48,7 @@ class AddSS(generics.CreateAPIView):
     serializer_class = AddSSSerializer
     authentication_classes = (ExpiringTokenAuthentication,)
     permission_classes = (permissions.IsAuthenticated,)
+    parser_classes = (parsers.JSONParser,)
 
     def create(self, request, *args, **kwargs):
         serializer = self.get_serializer(data=request.data)
