@@ -6,12 +6,11 @@ from rest_framework import parsers
 from rest_framework import filters
 from utils.authentication import ExpiringTokenAuthentication
 from rest_framework import permissions
-from Anonymous_message.settings import MEDIA_ROOT
+from Anonymous_message.settings import DOMAIN, MEDIA_URL
 import os
 from utils.ss_config import generate_qc, generate_ss_uri
 from rest_framework.response import Response
 from rest_framework import status
-
 
 # from rest_framework.response import Response
 # from rest_framework import status
@@ -58,7 +57,14 @@ class AddSS(generics.CreateAPIView):
         ss_uri = generate_ss_uri(serializer=serializer)
         generate_qc(ss_uri, serializer.validated_data['server_name'])
         file_name = serializer.validated_data['server_name'] + '.png'
-        serializer.validated_data['qr_code'] = os.path.join(MEDIA_ROOT, 'QR', file_name)
+        '''
+        旧写法
+        serializer.validated_data['qr_code'] = '/'.join(['http://'+DOMAIN, 'media', 'QR', file_name])
+        '''
+
+        # media/QR/file_name
+        serializer.validated_data['qr_code'] = '/'.join(['media', 'QR', file_name])
+        # print(serializer.validated_data['qr_code'])
         self.perform_create(serializer)
         headers = self.get_success_headers(serializer.data)
         serializer.validated_data['error_code'] = 0

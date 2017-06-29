@@ -2,7 +2,7 @@ from rest_framework import serializers
 from website.models import Messages, User, SS
 from django.utils import dateformat
 import base64
-from Anonymous_message.settings import MEDIA_ROOT
+from Anonymous_message.settings import DOMAIN
 
 # from rest_framework.exceptions import ValidationError
 # from django.contrib.auth.models import User
@@ -49,6 +49,15 @@ class GetSSSerializer(serializers.ModelSerializer):
         server_name = str('#' + obj.server_name).encode()
         ret = b'ss://' + base64.urlsafe_b64encode(config.encode()) + server_name
         return ret
+
+    def get_qr_code(self, obj):
+        url = obj.qr_code
+        # 兼容旧写法
+        if 'http://tofun.online' in url:
+            return url.replace('tofun.online', DOMAIN)
+        else:
+            new_url = '/'.join(['http://' + DOMAIN, url])
+            return new_url
 
 
 class AddSSSerializer(serializers.ModelSerializer):
