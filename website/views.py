@@ -6,17 +6,16 @@ from rest_framework import parsers
 from rest_framework import filters
 from utils.authentication import ExpiringTokenAuthentication
 from rest_framework import permissions
-from Anonymous_message.settings import DOMAIN, MEDIA_URL
-import os
 from utils.ss_config import generate_qc, generate_ss_uri
 from rest_framework.response import Response
 from rest_framework import status
+from price_tracker.jingdong.jd_api import add_item
 
 # from rest_framework.response import Response
 # from rest_framework import status
 
+'''Message相关API'''
 
-# Create your views here.
 
 class GetMessageList(generics.ListAPIView):
     queryset = Messages.objects.all()
@@ -34,6 +33,9 @@ class PostMessage(generics.CreateAPIView):
 class PostMessageDev(generics.CreateAPIView):
     serializer_class = PostMessageSerializer
     parser_classes = (parsers.FormParser,)
+
+
+'''SS相关API'''
 
 
 class GetSS(generics.ListAPIView):
@@ -69,3 +71,21 @@ class AddSS(generics.CreateAPIView):
         headers = self.get_success_headers(serializer.data)
         serializer.validated_data['error_code'] = 0
         return Response(serializer.validated_data, status=status.HTTP_201_CREATED, headers=headers)
+
+
+'''爬虫相关API'''
+
+
+class AddItem(APIView):
+    parser_classes = (parsers.JSONParser,)
+    serializer_class = AddItemSerializer
+
+    def post(self, request, *args, **kwargs):
+        serializer = AddItemSerializer(data=request.data)
+        if serializer.is_valid(raise_exception=True):
+            # print(serializer.validated_data)
+            if (add_item(serializer.validated_data['item_url'])):
+                ret = {'error_code': 0}
+                return Response(ret, status=status.HTTP_202_ACCEPTED)
+        ret = {'error_code': 1}
+        return Response(ret, status=status.HTTP_400_BAD_REQUEST)

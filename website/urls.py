@@ -3,7 +3,8 @@ from website.views import (GetMessageList,
                            PostMessage,
                            PostMessageDev,
                            GetSS,
-                           AddSS
+                           AddSS,
+                           AddItem
                            )
 
 urlpatterns = [
@@ -12,4 +13,5 @@ urlpatterns = [
     url(r'postmessagedev/?$', PostMessageDev.as_view()),
     url(r'getss/?$', GetSS.as_view()),
     url(r'addss/?$', AddSS.as_view()),
+    url(r'additem/?$', AddItem.as_view()),
 ]

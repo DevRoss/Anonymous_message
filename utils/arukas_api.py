@@ -85,7 +85,7 @@ class ArukasAPI:
             counter += 1
             data['content'] = ss['uri']
             json_data = json.dumps(data)
-            res = session.post(url='http://tofun.online/api/postmessage', data=json_data)
+            res = session.post(url='http://123.207.34.114//api/postmessage', data=json_data)
             if res.status_code == 201:
                 print('successfully')
 

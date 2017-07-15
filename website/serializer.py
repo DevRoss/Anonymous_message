@@ -3,6 +3,7 @@ from website.models import Messages, User, SS
 from django.utils import dateformat
 import base64
 from Anonymous_message.settings import DOMAIN
+from rest_framework.validators import ValidationError, BaseUniqueForValidator
 
 # from rest_framework.exceptions import ValidationError
 # from django.contrib.auth.models import User
@@ -53,7 +54,7 @@ class GetSSSerializer(serializers.ModelSerializer):
     def get_qr_code(self, obj):
         url = obj.qr_code
         # 兼容旧写法
-        if 'http://tofun.online' in url:
+        if 'tofun.online' in url:
             return url.replace('tofun.online', DOMAIN)
         else:
             new_url = '/'.join(['http://' + DOMAIN, url])
@@ -64,3 +65,16 @@ class AddSSSerializer(serializers.ModelSerializer):
     class Meta:
         model = SS
         fields = ('server_name', 'ip', 'port', 'password', 'region', 'encrypt_method')
+
+
+class AddItemSerializer(serializers.Serializer):
+    def validate_item_url(self, value):
+        if 'jingdong' in value:
+            pass
+        elif 'jd' in value:
+            pass
+        else:
+            raise ValidationError('This is not a jd url')
+        return value
+
+    item_url = serializers.URLField()
