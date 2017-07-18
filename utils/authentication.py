@@ -5,7 +5,7 @@ from rest_framework import exceptions
 from django.utils.translation import ugettext_lazy as _
 from django.core.cache import cache
 from django.utils import timezone
-
+from .my_exception import UserDoesNotExist
 
 class ExpiringTokenAuthentication(BaseAuthentication):
     model = Token
@@ -34,9 +34,9 @@ class ExpiringTokenAuthentication(BaseAuthentication):
         try:
             token = self.model.objects.get(key=key)
         except self.model.DoesNotExist:
-            raise exceptions.AuthenticationFailed('Authenticate failed.')
+            raise exceptions.AuthenticationFailed('User does not exist.')
         if not token.user.is_active:
-            raise exceptions.AuthenticationFailed('The user is forbidden.')
+            raise exceptions.PermissionDenied('The user is forbidden.')
         utc_now = timezone.now()
         if token.created < utc_now - timezone.timedelta(hours=24 * 30):
             raise exceptions.AuthenticationFailed('Token has been expired.')

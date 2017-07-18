@@ -7,3 +7,4 @@ Anonymous_message_uwsgi.ini
 .*/migrations/
 .website/migrations/*
 .media/*
+/media/QR/

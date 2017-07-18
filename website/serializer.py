@@ -68,6 +68,8 @@ class AddSSSerializer(serializers.ModelSerializer):
 
 
 class AddItemSerializer(serializers.Serializer):
+    item_url = serializers.URLField()
+
     def validate_item_url(self, value):
         if 'jingdong' in value:
             pass
@@ -76,5 +78,3 @@ class AddItemSerializer(serializers.Serializer):
         else:
             raise ValidationError('This is not a jd url')
         return value
-
-    item_url = serializers.URLField()
