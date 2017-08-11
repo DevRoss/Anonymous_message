@@ -3,8 +3,18 @@ Anonymous_message/settings_debug.py
 anonymous_message_nginx.conf
 Anonymous_message_uwsgi.ini
 .static/
+.idea/
 *.pyc
 .*/migrations/
 .website/migrations/*
 .media/*
 /media/QR/
+将删除 Anonymous_message/__pycache__/
+将删除 media/page_shot/
+将删除 static/
+将删除 templates/
+将删除 user/__pycache__/
+将删除 utils/__pycache__/
+将删除 utils/ghostdriver.log
+将删除 website/__pycache__/
+将删除 website/migrations/__pycache__/
