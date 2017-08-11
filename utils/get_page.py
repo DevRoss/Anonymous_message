@@ -2,7 +2,7 @@ from selenium import webdriver
 from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
 import time
 import os
-from Anonymous_message.settings import PAGE_SHOT_ROOT
+from Anonymous_message.settings import PAGE_SHOT_ROOT, PAGE_SHOT_URL
 import hashlib
 
 if not os.path.exists(PAGE_SHOT_ROOT):
@@ -33,7 +33,7 @@ class Browser:
         file_path = os.path.join(PAGE_SHOT_ROOT, sha1 + '.png')
         self.driver.save_screenshot(file_path)
         self.close()
-        return file_path
+        return os.path.join(PAGE_SHOT_URL, sha1 + '.png')
 
     def close(self):
         self.driver.quit()

@@ -1,7 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 import os
-from Anonymous_message.settings import MEDIA_ROOT
+from Anonymous_message.settings import MEDIA_ROOT, PAGE_SHOT_ROOT
 
 
 # Create your models here.
@@ -37,3 +37,10 @@ class SS(models.Model):
 
     def get_path(self):
         return os.path.join(MEDIA_ROOT, 'QC')
+
+
+class PageShot(models.Model):
+    url = models.URLField(verbose_name='快照url',blank=False)
+    file_path = models.FilePathField(verbose_name='快照路径', path=PAGE_SHOT_ROOT,
+                                     recursive=True, max_length=100, blank=True)
+    shot_name = models.CharField(verbose_name='快照名', max_length=30, null=False)
