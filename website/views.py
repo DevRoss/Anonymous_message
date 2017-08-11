@@ -9,7 +9,7 @@ from rest_framework import permissions
 from utils.ss_config import generate_qc, generate_ss_uri
 from rest_framework.response import Response
 from rest_framework import status
-from price_tracker.jingdong.jd_api import add_item
+from price_tracker.price_tracker.jingdong.jd_api import add_item
 
 # from rest_framework.response import Response
 # from rest_framework import status

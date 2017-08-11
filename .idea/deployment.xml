@@ -11,6 +11,9 @@
             <excludedPath local="true" path="$PROJECT_DIR$/templates" />
             <excludedPath path="/home/Anonymous_message/templates" />
             <excludedPath local="true" path="$PROJECT_DIR$/static" />
+            <excludedPath local="true" path="$PROJECT_DIR$/price_tracker/price_tracker/jingdong/jd_item" />
+            <excludedPath local="true" path="$PROJECT_DIR$/website/migrations" />
+            <excludedPath local="true" path="$PROJECT_DIR$/media" />
           </excludedPaths>
         </serverdata>
       </paths>

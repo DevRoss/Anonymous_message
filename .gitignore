@@ -18,3 +18,8 @@ Anonymous_message_uwsgi.ini
 将删除 utils/ghostdriver.log
 将删除 website/__pycache__/
 将删除 website/migrations/__pycache__/
+/website/migrations/
+将删除 price_tracker/
+将删除 price_tracker/price_tracker/__pycache__/
+将删除 price_tracker/price_tracker/jingdong/__pycache__/
+将删除 price_tracker/price_tracker/spiders/__pycache__/
