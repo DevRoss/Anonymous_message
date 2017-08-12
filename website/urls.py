@@ -9,5 +9,5 @@ urlpatterns = [
     url(r'addss/?$', AddSS.as_view()),
     url(r'additem/?$', AddItem.as_view()),
     url(r'get_shot/?$', GetShot.as_view()),
-    url(r'create_shot/?$', CreateShot.as_view()),
+    url(r'add_shot/?$', CreateShot.as_view()),
 ]

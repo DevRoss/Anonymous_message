@@ -102,6 +102,7 @@ class CreateShot(generics.CreateAPIView):
             serializer.validated_data['file_path'] = Browser().get_full_page_shot(serializer.validated_data.get('url'))
             print(serializer.validated_data['file_path'])
             self.perform_create(serializer)
+            serializer.validated_data['error_code'] = 0
             return Response(serializer.validated_data, status=status.HTTP_201_CREATED, headers=self.headers)
         return Response(status=status.HTTP_400_BAD_REQUEST)
 
