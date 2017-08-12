@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from website.models import Messages, User, SS
+from website.models import Messages, User, SS, PageShot
 from django.utils import dateformat
 import base64
 from Anonymous_message.settings import DOMAIN
@@ -78,3 +78,25 @@ class AddItemSerializer(serializers.Serializer):
         else:
             raise ValidationError('This is not a jd url')
         return value
+
+
+class AddShotSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = PageShot
+        fields = ('shot_name', 'url')
+
+
+
+class GetShotSerializer(serializers.ModelSerializer):
+    path = serializers.SerializerMethodField()
+
+    class Meta:
+        model = PageShot
+        fields = ('shot_name', 'path')
+
+    def get_path(self, obj):
+        print(obj.file_path)
+        p = '/'.join(['http://', DOMAIN, 'media', 'page_shot', obj.file_path])
+        print(p)
+        return p

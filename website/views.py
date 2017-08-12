@@ -10,6 +10,7 @@ from utils.ss_config import generate_qc, generate_ss_uri
 from rest_framework.response import Response
 from rest_framework import status
 from price_tracker.price_tracker.jingdong.jd_api import add_item
+from utils.get_page import Browser
 
 # from rest_framework.response import Response
 # from rest_framework import status
@@ -89,3 +90,22 @@ class AddItem(APIView):
                 return Response(ret, status=status.HTTP_202_ACCEPTED)
         ret = {'error_code': 1}
         return Response(ret, status=status.HTTP_400_BAD_REQUEST)
+
+
+class CreateShot(generics.CreateAPIView):
+    serializer_class = AddShotSerializer
+    parser_classes = (parsers.JSONParser,)
+
+    def post(self, requeset, *args, **kwargs):
+        serializer = AddShotSerializer(data=requeset.data)
+        if serializer.is_valid(raise_exception=True):
+            serializer.validated_data['file_path'] = Browser().get_full_page_shot(serializer.validated_data.get('url'))
+            print(serializer.validated_data['file_path'])
+            self.perform_create(serializer)
+            return Response(serializer.validated_data, status=status.HTTP_201_CREATED, headers=self.headers)
+        return Response(status=status.HTTP_400_BAD_REQUEST)
+
+
+class GetShot(generics.ListAPIView):
+    serializer_class = GetShotSerializer
+    queryset = PageShot.objects.all()

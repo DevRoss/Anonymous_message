@@ -33,7 +33,7 @@ class Browser:
         file_path = os.path.join(PAGE_SHOT_ROOT, sha1 + '.png')
         self.driver.save_screenshot(file_path)
         self.close()
-        return os.path.join(PAGE_SHOT_URL, sha1 + '.png')
+        return os.path.join(sha1 + '.png')
 
     def close(self):
         self.driver.quit()
@@ -43,4 +43,5 @@ if __name__ == '__main__':
     browser = Browser()
     # url = 'http://www.bilibili.com/'
     url = 'http://www.dilidili.wang/'
-    browser.get_full_page_shot(url)
+    print(browser.get_full_page_shot(url))
+

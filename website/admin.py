@@ -14,3 +14,8 @@ class MessagesAdmin(admin.ModelAdmin):
 class MessagesAdmin(admin.ModelAdmin):
     list_display = ('server_name', 'ip', 'port', 'password', 'region', 'encrypt_method')
     search_fields = ('region',)
+
+@admin.register(PageShot)
+class PageShotAdmin(admin.ModelAdmin):
+    list_display = ('shot_name', 'url', 'file_path')
+
