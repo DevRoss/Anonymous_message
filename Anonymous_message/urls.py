@@ -17,8 +17,10 @@ from django.conf.urls import url,include
 from django.contrib import admin
 import website.urls
 import user.urls
+import chat.urls
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^api', include(user.urls)),
     url(r'^api', include(website.urls)),
+    url(r'^anonymous-chat', include(chat.urls)),
 ]

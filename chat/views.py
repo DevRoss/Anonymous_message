@@ -1,3 +1,10 @@
-from django.shortcuts import render
+from .models import Room
+from rest_framework.generics import CreateAPIView, ListAPIView
 
-# Create your views here.
+
+class CreateRoom(CreateAPIView):
+    pass
+
+
+class EnterRoom(ListAPIView):
+    pass
