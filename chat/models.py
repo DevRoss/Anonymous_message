@@ -3,7 +3,7 @@ from django.utils import timezone
 
 
 class Room(models.Model):
-    name = models.TextField()
+    name = models.TextField(blank=True)
     label = models.SlugField(unique=True)
 
     def __str__(self):
