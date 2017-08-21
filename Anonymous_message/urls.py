@@ -22,5 +22,5 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^api', include(user.urls)),
     url(r'^api', include(website.urls)),
-    url(r'^anonymous-chat', include(chat.urls)),
+    url(r'^api', include(chat.urls)),
 ]

@@ -1,7 +1,7 @@
 Anonymous_message/settings.py
 Anonymous_message/settings_debug.py
 anonymous_message_nginx.conf
-Anonymous_message_uwsgi.ini
+conf/product/Anonymous_message_uwsgi.ini
 .static/
 .idea/
 *.pyc
