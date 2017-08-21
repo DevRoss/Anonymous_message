@@ -5,10 +5,10 @@ from .models import Room, Message
 class CreateRoomSerializer(serializers.ModelSerializer):
     class Meta:
         model = Room
-        fields = '__all__'
+        fields = ('name', 'label')
 
 
 class EnterRoomSerializer(serializers.ModelSerializer):
     class Meta:
         model = Message
-        fields = '__all__'
+        fields = ('room', 'handle', 'message', 'timestamp')

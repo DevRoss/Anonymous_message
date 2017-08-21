@@ -9,7 +9,6 @@
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/chat/serializer.py" afterPath="$PROJECT_DIR$/chat/serializer.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/chat/views.py" afterPath="$PROJECT_DIR$/chat/views.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ghostdriver.log" afterPath="$PROJECT_DIR$/ghostdriver.log" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/utils/exception_handler.py" afterPath="$PROJECT_DIR$/utils/exception_handler.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -835,7 +834,14 @@
       <option name="project" value="LOCAL" />
       <updated>1503290853834</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="new: add_error_code_zero">
+      <created>1503292156710</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1503292156710</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -903,7 +909,8 @@
     <MESSAGE value="fix routing" />
     <MESSAGE value="Modify routing" />
     <MESSAGE value="modify chat api url" />
-    <option name="LAST_COMMIT_MESSAGE" value="modify chat api url" />
+    <MESSAGE value="new: add_error_code_zero" />
+    <option name="LAST_COMMIT_MESSAGE" value="new: add_error_code_zero" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
