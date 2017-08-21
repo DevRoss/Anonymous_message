@@ -9,6 +9,11 @@ PermissionDenied : 3
 '''
 
 
+def add_error_code_zero(data):
+    if not data.get('error_code'):
+        data['error_code'] = 0
+    return data
+
 def my_exception_handler(exc, context):
     # Call REST framework's default exception handler first,
     # to get the standard error response.
